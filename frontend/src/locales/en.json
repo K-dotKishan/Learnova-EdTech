@@ -1,0 +1,247 @@
+{
+  "legends": {
+    "page_title": "Legends & Life Stories",
+    "page_subtitle": "Discover the inspiring lives of history's greatest personalities — presented as vivid interactive comic stories.",
+    "search_placeholder": "Search legends…",
+    "all_category": "All",
+    "coming_soon_title": "Story Coming Soon",
+    "coming_soon_body": "Complete stories available for Gandhi, Dr. APJ Abdul Kalam and Einstein.",
+    "about_prefix": "About",
+    "all_panels": "All Panels",
+    "back_to_legends": "← Legends",
+    "listen": "🔊 Listen",
+    "stop": "⏹ Stop",
+    "saved": "♥ Saved",
+    "save": "♡ Save",
+    "fullscreen": "⛶",
+    "exit_fullscreen": "⊡",
+    "panel_of": "Panel {current} of {total}",
+    "previous": "← Previous",
+    "next_panel": "Next Panel →",
+    "take_quiz": "🎯 Take Quiz",
+    "jump_to_quiz": "🎯 Jump to Quiz",
+    "read_story": "Read Story",
+    "category_comics": "📖 Comic Life Stories",
+    "career_tips_title": "💡 Career Tips",
+    "browse_legends": "← Browse Legends"
+  },
+  "stories": {
+    "mahatma-gandhi": {
+      "name": "Mahatma Gandhi",
+      "tagline": "Father of the Nation — led India to independence through nonviolent resistance",
+      "overview": "Mohandas Karamchand Gandhi, known as Mahatma ('Great Soul'), was the primary leader of India's independence movement. Through nonviolent civil disobedience, he inspired movements for civil rights and freedom across the world. His philosophy of Satyagraha — insistence on truth — transformed modern political thought.",
+      "panels": [
+        {
+          "title": "Mahatma Gandhi",
+          "narration": "Born on 2 October 1869 in Porbandar, a small coastal town in Gujarat, Mohandas Karamchand Gandhi would grow up to become the Father of the Nation — leading the largest nonviolent independence movement in history.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "A Shy Child from Porbandar",
+          "narration": "Mohan was a shy, timid child who feared the dark. His deeply religious mother Putlibai instilled in him the values of fasting, prayer and service. These early influences shaped his entire life.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "South Africa Changes Everything",
+          "narration": "In 1893, Gandhi was thrown off a train at Pietermaritzburg despite holding a first-class ticket, solely because of his race. This injustice awakened a fire within him — and Satyagraha was born.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Birth of Satyagraha",
+          "narration": "Gandhi spent 21 years in South Africa fighting for the rights of Indian immigrants. He developed Satyagraha — 'insistence on truth' — as a tool of nonviolent resistance. Through peaceful protests, he won important rights without firing a single bullet.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Return to India",
+          "narration": "Gandhi returned to India in 1915. For a year he travelled across India by train in third class, learning about the poverty of ordinary Indians. What he saw moved him deeply and prepared him for the great struggle ahead.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "The Salt March",
+          "narration": "On 12 March 1930, Gandhi led the famous 390-kilometre Dandi March to protest the British salt tax. He picked up a lump of salt from the beach on 6 April. This simple act sparked a nationwide movement and shook the British Empire.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Quit India — The Final Push",
+          "narration": "On 8 August 1942, Gandhi launched the Quit India Movement with the rallying cry 'Do or Die'. He and thousands of Congress leaders were immediately arrested. Despite crackdowns, independence was now inevitable.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Independence at Last",
+          "narration": "India gained independence on 15 August 1947. However, the partition of India and Pakistan brought devastating violence that distressed Gandhi deeply. He spent his final months working tirelessly for communal peace.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "What Gandhi Teaches Us",
+          "narration": "Gandhi's life teaches us that nonviolence is not weakness — it is the highest form of courage. He showed that one person with truth on their side can challenge the most powerful empire.",
+          "speech_bubble": ""
+        }
+      ],
+      "quiz": [
+        {
+          "question": "In what year was Mahatma Gandhi born?",
+          "options": { "a": "1869", "b": "1876", "c": "1858", "d": "1900" },
+          "explanation": "Gandhi was born on 2 October 1869 in Porbandar, Gujarat."
+        },
+        {
+          "question": "What is 'Satyagraha'?",
+          "options": { "a": "A type of weapon", "b": "Insistence on truth / nonviolent resistance", "c": "A meditation practice", "d": "A festival" },
+          "explanation": "Satyagraha means insistence on truth — the philosophy of nonviolent resistance Gandhi developed in South Africa."
+        },
+        {
+          "question": "What was the Salt March of 1930?",
+          "options": { "a": "A march to a salt factory", "b": "A march to protest salt taxes by making salt from the sea", "c": "A salt trade agreement with Britain", "d": "A religious pilgrimage" },
+          "explanation": "Gandhi led a 390-km march to Dandi to defy the British salt tax by making salt from seawater."
+        },
+        {
+          "question": "What was Gandhi's famous 1942 movement called?",
+          "options": { "a": "Non-Cooperation Movement", "b": "Civil Disobedience Movement", "c": "Quit India Movement", "d": "Swadeshi Movement" },
+          "explanation": "The Quit India Movement of 1942 was Gandhi's last major campaign demanding immediate British withdrawal from India."
+        }
+      ]
+    },
+    "apj-abdul-kalam": {
+      "name": "Dr. APJ Abdul Kalam",
+      "tagline": "Missile Man of India — scientist, President, and eternal inspiration to millions",
+      "overview": "Avul Pakir Jainulabdeen Abdul Kalam was an aerospace scientist who served as the 11th President of India from 2002 to 2007. Known as the Missile Man of India, he played a pivotal role in India's civilian space programme and military missile development.",
+      "panels": [
+        {
+          "title": "Dr. APJ Abdul Kalam",
+          "narration": "Born on 15 October 1931 in Rameswaram, Tamil Nadu, the son of a boat owner who sold newspapers on trains would one day send India's missiles into the sky and lead the nation as its beloved President.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "The Newspaper Boy of Rameswaram",
+          "narration": "Kalam grew up in a modest family in Rameswaram. From a very young age he distributed newspapers to help the family. Despite hardship, his parents ensured their children received education.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Dreams Take Flight",
+          "narration": "Watching birds fly along Rameswaram's coast fascinated young Kalam. He studied aeronautical engineering at the Madras Institute of Technology. He dreamed of becoming a fighter pilot but missed selection by a narrow margin.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Rocket Man of ISRO",
+          "narration": "Kalam joined ISRO in 1969 as project director of India's first indigenous satellite launch vehicle — SLV-3. On 18 July 1980, SLV-3 successfully placed the Rohini satellite in orbit.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Missile Man of India",
+          "narration": "Kalam led India's Integrated Guided Missile Development Programme (IGMDP), successfully developing Agni, Prithvi, Akash, Trishul and Nag missiles. His work gave India strategic autonomy and earned him the Bharat Ratna in 1997.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "The People's President",
+          "narration": "In 2002, Kalam was elected as the 11th President of India — the first scientist to hold the office. He was beloved by young people and spent his presidency inspiring millions of students. He called himself 'a teacher who happened to become President'.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Teaching to the Last Day",
+          "narration": "On 27 July 2015, while delivering a lecture at IIM Shillong on creating a livable planet, Kalam collapsed on stage and passed away. He died doing what he loved most — teaching young people.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Wings of Fire — What Kalam Teaches Us",
+          "narration": "Kalam's life teaches us that dreams know no boundaries of poverty or background. His words: 'You have to dream before your dreams can come true.' He believed every child is special and that great teachers shape great nations.",
+          "speech_bubble": ""
+        }
+      ],
+      "quiz": [
+        {
+          "question": "What was APJ Abdul Kalam's childhood job?",
+          "options": { "a": "Fishing", "b": "Selling newspapers", "c": "Farming", "d": "Teaching" },
+          "explanation": "Kalam sold newspapers in Rameswaram to help support his family financially."
+        },
+        {
+          "question": "What does ISRO stand for?",
+          "options": { "a": "Indian Space Research Organisation", "b": "International Space Research Organisation", "c": "Indian Scientific Research Organisation", "d": "Indian Satellite and Rocket Organisation" },
+          "explanation": "ISRO is the Indian Space Research Organisation, where Kalam was project director of SLV-3."
+        },
+        {
+          "question": "What nickname was given to Kalam for his work on missiles?",
+          "options": { "a": "Rocket Man", "b": "Missile Man of India", "c": "Space Pioneer", "d": "Defence Scientist" },
+          "explanation": "Kalam was called the Missile Man of India for leading the IGMDP that developed Agni, Prithvi and other missiles."
+        },
+        {
+          "question": "Which prestigious award did Kalam receive in 1997?",
+          "options": { "a": "Padma Bhushan", "b": "Padma Vibhushan", "c": "Bharat Ratna", "d": "Nobel Prize" },
+          "explanation": "Kalam received the Bharat Ratna — India's highest civilian honour — in 1997."
+        }
+      ]
+    },
+    "albert-einstein": {
+      "name": "Albert Einstein",
+      "tagline": "Changed our understanding of space, time and the universe with the Theory of Relativity",
+      "overview": "Albert Einstein was a German-born theoretical physicist who developed the theory of relativity. He received the Nobel Prize in Physics in 1921. His name has become synonymous with genius.",
+      "panels": [
+        {
+          "title": "Albert Einstein",
+          "narration": "Born on 14 March 1879 in Ulm, Germany, Albert Einstein would grow up to fundamentally change how humanity understands space, time, gravity and the universe itself.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "The Late Talker Who Loved Puzzles",
+          "narration": "Albert was slow to talk as a child and was labeled 'mentally slow' by some teachers. Yet at age 5, his father gave him a compass — Einstein was fascinated that the needle always pointed north, as if guided by an invisible force.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Expelled and Enlightened",
+          "narration": "Einstein dropped out of school at 15 and failed his entrance exam to ETH Zurich on the first attempt. Despite this setback, he was admitted after completing a preparatory school and graduated in 1900 in physics and mathematics.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Patent Clerk With a Universe in His Mind",
+          "narration": "Einstein could not find a teaching position after graduation and took a job as a patent clerk in Bern. While reviewing other people's inventions by day, he spent evenings developing revolutionary ideas. He called 1905 his 'miracle year'.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "The Miracle Year — 1905",
+          "narration": "In 1905, Einstein published four papers that revolutionised physics: the photoelectric effect, Brownian motion, special relativity, and the famous equation E=mc², which revealed the relationship between mass and energy.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "General Relativity — Gravity Reimagined",
+          "narration": "In 1915, Einstein published his General Theory of Relativity, reimagining gravity not as a force but as a curvature of spacetime. His predictions were confirmed in 1919 when astronomers observed light bending around the Sun. He became world-famous overnight.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "Nobel Prize and Exile",
+          "narration": "Einstein won the Nobel Prize in Physics in 1921 for his explanation of the photoelectric effect. When the Nazis rose to power in 1933, Einstein — who was Jewish — was in the United States. He never returned to Germany and became an American citizen in 1940.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "The Legacy of a Curious Mind",
+          "narration": "Einstein died on 18 April 1955. His theories underpin GPS navigation, lasers, solar panels and much of modern technology. His famous equation E=mc² remains one of the most recognisable scientific statements in history.",
+          "speech_bubble": ""
+        },
+        {
+          "title": "What Einstein Teaches Us",
+          "narration": "Einstein's life teaches us never to judge intelligence by test scores or early performance. He showed that curiosity, persistence and independent thinking are more valuable than memorization. 'Imagination is more important than knowledge.'",
+          "speech_bubble": ""
+        }
+      ],
+      "quiz": [
+        {
+          "question": "What is Einstein's famous equation relating mass and energy?",
+          "options": { "a": "F=ma", "b": "E=mc²", "c": "PV=nRT", "d": "a²+b²=c²" },
+          "explanation": "E=mc² means energy equals mass times the speed of light squared — revealing the enormous energy stored in matter."
+        },
+        {
+          "question": "For which discovery did Einstein win the Nobel Prize in Physics?",
+          "options": { "a": "Theory of Relativity", "b": "Atomic Bomb", "c": "Photoelectric Effect", "d": "Brownian Motion" },
+          "explanation": "Einstein won the 1921 Nobel Prize for his explanation of the photoelectric effect, not for relativity."
+        },
+        {
+          "question": "What year was Einstein's 'Miracle Year'?",
+          "options": { "a": "1900", "b": "1905", "c": "1915", "d": "1921" },
+          "explanation": "1905 was Einstein's Annus Mirabilis when he published four revolutionary papers while working as a patent clerk."
+        },
+        {
+          "question": "Einstein's General Theory of Relativity reimagined which force?",
+          "options": { "a": "Electricity", "b": "Magnetism", "c": "Gravity", "d": "Nuclear force" },
+          "explanation": "General Relativity reimagined gravity — not as a force but as a curvature of spacetime caused by mass."
+        }
+      ]
+    }
+  }
+}

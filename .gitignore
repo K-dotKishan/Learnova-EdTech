@@ -1,0 +1,51 @@
+# ── Python / Django ───────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg-info/
+
+# Django
+backend/db.sqlite3
+backend/media/
+backend/staticfiles/
+backend/.env
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+ENV/
+
+# ── Node / React ──────────────────────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# ── IDE / OS ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Kiro spec / AI tool files ─────────────────────────────────────────────────
+.kiro/
+
+# ── Migrations (optional — commit these for team projects) ───────────────────
+# backend/api/migrations/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
