@@ -503,10 +503,10 @@ function ComicPanel({ panel, index, lang, isActive, isMini, onClick, legendPhoto
 export default function LegendStory({ user }) {
   const { slug }  = useParams();
   const navigate  = useNavigate();
+  const { lang, setLang, t, story: localStory } = useLang();
 
   const [story, setStory]           = useState(null);
   const [loading, setLoading]       = useState(true);
-  const [lang, setLang]             = useState("en");
   const [current, setCurrent]       = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
@@ -529,7 +529,56 @@ export default function LegendStory({ user }) {
 
   useEffect(() => () => window.speechSynthesis?.cancel(), []);
 
-  function goPanel(i) { if (story) setCurrent(Math.max(0, Math.min(i, story.panels.length - 1))); }
+  // Merge local JSON translations into API panels.
+  // For Gandhi/Kalam/Einstein, the JSON files have full EN+HI content.
+  // For other slugs, falls back to the _hi fields from the API.
+  const mergedStory = useMemo(() => {
+    if (!story) return null;
+    const local = localStory(slug); // from en.json or hi.json depending on lang
+    if (!local) return story;       // no local data — use API as-is
+
+    // Merge story-level fields from local JSON
+    const merged = {
+      ...story,
+      name:    local.name    || story.name,
+      tagline: local.tagline || story.tagline,
+      overview: local.overview || story.overview,
+    };
+
+    // Merge panel text from local JSON (indexed by order)
+    if (local.panels && story.panels) {
+      merged.panels = story.panels.map((panel, i) => {
+        const lp = local.panels[i];
+        if (!lp) return panel;
+        return {
+          ...panel,
+          title:         lp.title         || panel.title,
+          narration:     lp.narration     || panel.narration,
+          speech_bubble: lp.speech_bubble || panel.speech_bubble,
+        };
+      });
+    }
+
+    // Merge quiz from local JSON
+    if (local.quiz && story.quiz) {
+      merged.quiz = story.quiz.map((q, i) => {
+        const lq = local.quiz[i];
+        if (!lq) return q;
+        return {
+          ...q,
+          question:    lq.question    || q.question,
+          options:     lq.options     || q.options,
+          explanation: lq.explanation || q.explanation,
+        };
+      });
+    }
+
+    return merged;
+  }, [story, slug, lang, localStory]);
+
+  function goPanel(i) {
+    if (mergedStory) setCurrent(Math.max(0, Math.min(i, mergedStory.panels.length - 1)));
+  }
 
   async function toggleBookmark() {
     if (!user) { navigate("/login"); return; }
@@ -538,9 +587,9 @@ export default function LegendStory({ user }) {
   }
 
   function readAloud() {
-    if (!story?.panels?.length) return;
-    const p = story.panels[current];
-    const text = (lang === "hi" && p.narration_hi) ? p.narration_hi : p.narration;
+    if (!mergedStory?.panels?.length) return;
+    const p = mergedStory.panels[current];
+    const text = p.narration || "";
     if (!window.speechSynthesis) return;
     if (narrating) { window.speechSynthesis.cancel(); setNarrating(false); return; }
     const utt = new SpeechSynthesisUtterance(text);
@@ -559,17 +608,17 @@ export default function LegendStory({ user }) {
     );
   }
 
-  if (!story) {
+  if (!mergedStory) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] bg-stone-950 text-white text-center px-4">
         <p className="text-5xl mb-4">📖</p>
         <p className="text-xl font-semibold">Story not found.</p>
-        <Link to="/legends" className="btn mt-6 inline-block">← Browse All Legends</Link>
+        <Link to="/legends" className="btn mt-6 inline-block">{t("legends.browse_legends")}</Link>
       </div>
     );
   }
 
-  const panels   = story.panels || [];
+  const panels   = mergedStory.panels || [];
   const panel    = panels[current];
   const progress = panels.length > 0 ? Math.round(((current + 1) / panels.length) * 100) : 0;
   const cfg      = panel ? (PANEL_CFG[panel.panel_type] || PANEL_CFG.event) : PANEL_CFG.cover;
@@ -580,15 +629,15 @@ export default function LegendStory({ user }) {
       <div className="min-h-screen bg-stone-950 text-white flex items-center justify-center px-4">
         <div className="max-w-lg w-full text-center">
           <div className={`rounded-3xl overflow-hidden mb-8 relative`} style={{ minHeight: 300 }}>
-            {story.photo_url && <img src={story.photo_url} alt={story.name} className="w-full h-full object-cover object-top absolute inset-0" style={{ filter: "brightness(0.5)" }} />}
+            {mergedStory.photo_url && <img src={mergedStory.photo_url} alt={mergedStory.name} className="w-full h-full object-cover object-top absolute inset-0" style={{ filter: "brightness(0.5)" }} />}
             <div className="relative z-10 p-10">
-              <h1 className="font-display text-4xl font-extrabold mb-3">{story.name}</h1>
-              <p className="text-white/70">{story.tagline}</p>
+              <h1 className="font-display text-4xl font-extrabold mb-3">{mergedStory.name}</h1>
+              <p className="text-white/70">{mergedStory.tagline}</p>
             </div>
           </div>
           <div className="card bg-stone-900 border-stone-700">
-            <p className="text-lg font-bold mb-2">🚧 Story Coming Soon</p>
-            <p className="text-sm opacity-60 mb-5">Complete stories available for Gandhi, Kalam and Einstein.</p>
+            <p className="text-lg font-bold mb-2">🚧 {t("legends.coming_soon_title")}</p>
+            <p className="text-sm opacity-60 mb-5">{t("legends.coming_soon_body")}</p>
             <Link to="/legends" className="btn inline-block">← Browse Legends</Link>
           </div>
         </div>
@@ -601,47 +650,39 @@ export default function LegendStory({ user }) {
 
       {/* ── Cinematic hero cover ──────────────────────────────────────── */}
       <div className="relative overflow-hidden" style={{ minHeight: 320 }}>
-        {/* Full bleed photo */}
-        {story.photo_url && (
-          <img src={story.photo_url} alt={story.name}
+        {mergedStory.photo_url && (
+          <img src={mergedStory.photo_url} alt={mergedStory.name}
             className="absolute inset-0 w-full h-full object-cover object-top"
             style={{ filter: "brightness(0.4) contrast(1.15) saturate(1.1)" }} />
         )}
-        {/* Comic gradient overlay */}
         <div className="absolute inset-0"
           style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.85) 100%)" }} />
-        {/* Halftone */}
         <Halftone opacity={0.06} />
-        {/* Colored edge accent */}
         <div className="absolute left-0 top-0 bottom-0 w-1.5" style={{ background: cfg.color }} />
-
-        {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-10 flex items-end gap-8 flex-wrap" style={{ minHeight: 320 }}>
-          {/* Large portrait circle */}
-          {story.photo_url && (
+          {mergedStory.photo_url && (
             <div className="flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl hidden md:block"
               style={{ width: 160, height: 200, border: `3px solid ${cfg.color}60`, boxShadow: `0 0 40px ${cfg.color}30` }}>
-              <img src={story.photo_url} alt={story.name} className="w-full h-full object-cover object-top" />
+              <img src={mergedStory.photo_url} alt={mergedStory.name} className="w-full h-full object-cover object-top" />
             </div>
           )}
-          {/* Text */}
           <div className="flex-1 min-w-0 pb-2">
             <div className="flex items-center gap-2 mb-3 flex-wrap">
               <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
                 style={{ background: cfg.color, color: "#000" }}>
-                {story.category}
+                {mergedStory.category}
               </span>
-              {story.born && (
+              {mergedStory.born && (
                 <span className="text-xs text-white/40 font-mono">
-                  {story.born}{story.died ? ` — ${story.died}` : ""} · {story.nationality}
+                  {mergedStory.born}{mergedStory.died ? ` — ${mergedStory.died}` : ""} · {mergedStory.nationality}
                 </span>
               )}
             </div>
             <h1 className="font-display text-5xl md:text-6xl font-extrabold leading-none mb-3 tracking-tight">
-              {lang === "hi" && story.name_hi ? story.name_hi : story.name}
+              {mergedStory.name}
             </h1>
             <p className="text-white/60 text-base leading-relaxed max-w-xl">
-              {lang === "hi" && story.tagline_hi ? story.tagline_hi : story.tagline}
+              {mergedStory.tagline}
             </p>
           </div>
         </div>
@@ -664,26 +705,28 @@ export default function LegendStory({ user }) {
             </div>
           </div>
           <div className="flex items-center gap-1.5 flex-wrap">
-            {/* Language toggle */}
+            {/* Language toggle — EN / हिंदी */}
             <div className="flex bg-white/10 rounded-lg p-0.5 text-xs">
-              {[["en","EN"],["hi","HI"]].map(([code, label]) => (
-                <button key={code} onClick={() => setLang(code)}
-                  className={`px-3 py-1 rounded-md transition font-bold ${lang === code ? "bg-white text-stone-900" : "text-white/60 hover:text-white"}`}>
-                  {label}
-                </button>
-              ))}
+              <button onClick={() => setLang("en")}
+                className={`px-3 py-1 rounded-md transition font-bold ${lang === "en" ? "bg-white text-stone-900" : "text-white/60 hover:text-white"}`}>
+                EN
+              </button>
+              <button onClick={() => setLang("hi")}
+                className={`px-3 py-1 rounded-md transition font-bold ${lang === "hi" ? "bg-white text-stone-900" : "text-white/60 hover:text-white"}`}>
+                हिंदी
+              </button>
             </div>
             <button onClick={readAloud}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition ${narrating ? "text-leaf border-leaf bg-leaf/10" : "text-white/60 border-white/20 hover:border-white/40"}`}>
-              {narrating ? "⏹ Stop" : "🔊 Listen"}
+              {narrating ? t("legends.stop") : t("legends.listen")}
             </button>
             <button onClick={toggleBookmark}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition ${bookmarked ? "text-yellow-400 border-yellow-400/40 bg-yellow-400/10" : "text-white/60 border-white/20 hover:border-yellow-400/40"}`}>
-              {bookmarked ? "♥ Saved" : "♡ Save"}
+              {bookmarked ? t("legends.saved") : t("legends.save")}
             </button>
             <button onClick={() => setFullscreen(f => !f)}
               className="px-3 py-1.5 rounded-lg text-xs font-medium border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition">
-              {fullscreen ? "⊡" : "⛶"}
+              {fullscreen ? t("legends.exit_fullscreen") : t("legends.fullscreen")}
             </button>
           </div>
         </div>
@@ -710,7 +753,7 @@ export default function LegendStory({ user }) {
         {panel && (
           <div ref={panelRef} className="mb-8">
             <ComicPanel panel={panel} index={current} lang={lang} isActive
-              legendPhoto={story.photo_url} onClick={() => {}} />
+              legendPhoto={mergedStory.photo_url} onClick={() => {}} />
           </div>
         )}
 
@@ -740,41 +783,43 @@ export default function LegendStory({ user }) {
           <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-9 gap-2">
             {panels.map((p, i) => (
               <ComicPanel key={p.id} panel={p} index={i} lang={lang}
-                isActive={i === current} isMini legendPhoto={story.photo_url}
+                isActive={i === current} isMini legendPhoto={mergedStory.photo_url}
                 onClick={() => goPanel(i)} />
             ))}
           </div>
         </div>
 
         {/* Overview */}
-        {story.overview && (
+        {mergedStory.overview && (
           <div className="rounded-2xl overflow-hidden mb-8"
             style={{ border: `2px solid ${cfg.color}30`, background: "rgba(255,255,255,0.03)" }}>
             <div className="px-6 py-3 flex items-center gap-2"
               style={{ background: `${cfg.color}15`, borderBottom: `1px solid ${cfg.color}20` }}>
               <div className="w-1 h-5 rounded-full" style={{ background: cfg.color }} />
-              <h2 className="font-display font-bold text-lg text-white">About {story.name}</h2>
+              <h2 className="font-display font-bold text-lg text-white">
+                {t("legends.about_prefix")} {mergedStory.name}
+              </h2>
             </div>
             <div className="px-6 py-5">
               <p className="text-white/70 text-sm leading-relaxed">
-                {lang === "hi" && story.overview_hi ? story.overview_hi : story.overview}
+                {mergedStory.overview}
               </p>
-              {story.photo_attribution && (
-                <p className="text-white/25 text-xs mt-3">{story.photo_attribution}</p>
+              {mergedStory.photo_attribution && (
+                <p className="text-white/25 text-xs mt-3">{mergedStory.photo_attribution}</p>
               )}
             </div>
           </div>
         )}
 
         {/* Quiz */}
-        {(showQuiz || current === panels.length - 1) && story.quiz?.length > 0 && (
-          <Quiz questions={story.quiz} lang={lang} />
+        {(showQuiz || current === panels.length - 1) && mergedStory.quiz?.length > 0 && (
+          <Quiz questions={mergedStory.quiz} lang={lang} />
         )}
-        {!showQuiz && story.quiz?.length > 0 && current < panels.length - 1 && (
+        {!showQuiz && mergedStory.quiz?.length > 0 && current < panels.length - 1 && (
           <div className="text-center mt-2 mb-6">
             <button onClick={() => setShowQuiz(true)}
               className="text-sm border border-white/20 px-5 py-2 rounded-xl text-white/50 hover:text-white hover:border-white/40 transition">
-              🎯 Jump to Quiz
+              {t("legends.jump_to_quiz")}
             </button>
           </div>
         )}
