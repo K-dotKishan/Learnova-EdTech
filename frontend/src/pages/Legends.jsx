@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../api.js";
+import useLang from "../hooks/useLang.js";
 
 // ── Personality card with real photo ─────────────────────────────────────────
 function LegendCard({ legend }) {
@@ -90,6 +91,7 @@ function CategoryChip({ cat, active, onClick }) {
 }
 
 export default function Legends({ user }) {
+  const { lang, setLang, t } = useLang();
   const [legends, setLegends]       = useState([]);
   const [categories, setCategories] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -133,7 +135,6 @@ export default function Legends({ user }) {
 
       {/* ── Cinematic hero banner ──────────────────────────────────────── */}
       <div className="relative rounded-3xl overflow-hidden mb-10 shadow-2xl" style={{ minHeight: 220 }}>
-        {/* Background collage of personality photos */}
         <div className="absolute inset-0 flex">
           {["/personalities/gandhi.png", "/personalities/apj_kalam.png",
             "/personalities/albert_einstein.png", "/personalities/bhagat_singh.png",
@@ -144,22 +145,32 @@ export default function Legends({ user }) {
             </div>
           ))}
         </div>
-        {/* Deep gradient over the photos */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/95 via-purple-900/90 to-pink-900/85" />
-        {/* Comic halftone texture */}
         <div className="absolute inset-0 opacity-5"
           style={{ backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
-        {/* Content */}
         <div className="relative z-10 p-10 text-white text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-4">
-            📖 Comic Life Stories
+            {t("legends.category_comics")}
           </div>
           <h1 className="font-display text-5xl md:text-6xl font-extrabold mb-3 leading-tight">
-            Legends &amp; <span className="text-saffron">Life Stories</span>
+            {t("legends.page_title")}
           </h1>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto">
-            Discover the inspiring lives of history's greatest personalities — presented as vivid interactive comic stories.
+          <p className="text-white/80 text-lg max-w-2xl mx-auto mb-5">
+            {t("legends.page_subtitle")}
           </p>
+          {/* Language toggle on the listing page too */}
+          <div className="flex justify-center">
+            <div className="flex bg-white/10 rounded-xl p-1 text-sm gap-0.5">
+              <button onClick={() => setLang("en")}
+                className={`px-5 py-1.5 rounded-lg transition font-semibold ${lang === "en" ? "bg-white text-stone-900" : "text-white/70 hover:text-white"}`}>
+                🇬🇧 English
+              </button>
+              <button onClick={() => setLang("hi")}
+                className={`px-5 py-1.5 rounded-lg transition font-semibold ${lang === "hi" ? "bg-white text-stone-900" : "text-white/70 hover:text-white"}`}>
+                🇮🇳 हिंदी
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
