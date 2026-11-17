@@ -349,14 +349,6 @@ export default function KnowledgeArena({ user }) {
             Test your skills with timed quizzes, earn XP, and climb the leaderboard.
           </p>
           <div className="flex justify-center gap-3 flex-wrap">
-            <div className="flex bg-white/10 rounded-xl p-0.5 text-sm">
-              {[["en", "🇬🇧 EN"], ["hi", "🇮🇳 HI"]].map(([code, label]) => (
-                <button key={code} onClick={() => setLang(code)}
-                  className={`px-4 py-1.5 rounded-lg transition font-medium ${lang === code ? "bg-white text-stone-900" : "text-white/60 hover:text-white"}`}>
-                  {label}
-                </button>
-              ))}
-            </div>
             {myStats && (
               <div className="flex items-center gap-2 bg-white/10 rounded-xl px-4 py-2 text-sm">
                 <span className="text-saffron font-bold">⚡ {myStats.total_xp} XP</span>
