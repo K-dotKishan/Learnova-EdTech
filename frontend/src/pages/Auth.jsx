@@ -39,12 +39,12 @@ export default function Auth({ mode, setUser }) {
     <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-stone-50 to-teal-50 dark:from-ink dark:to-teal-950">
       <form onSubmit={submit} className="card w-full max-w-sm space-y-4">
         <div className="text-center mb-2">
-          <span className="text-4xl">🌐</span>
+          <span className="text-4xl">🌿</span>
           <h2 className="font-display text-2xl font-bold mt-2">
-            {isLogin ? "Welcome back" : "Create your account"}
+            {isLogin ? "Welcome back to Learnova" : "Join Learnova"}
           </h2>
           <p className="text-sm opacity-60 mt-1">
-            {isLogin ? "Sign in to continue learning" : "Start learning in your language"}
+            {isLogin ? "Sign in to continue learning" : "Start your learning journey today"}
           </p>
         </div>
 
