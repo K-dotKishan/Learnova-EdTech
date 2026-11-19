@@ -35,12 +35,12 @@ export default function Landing({ user }) {
             ))}
           </div>
           <h1 className="font-display text-5xl md:text-7xl font-extrabold leading-tight max-w-4xl">
-            One teacher speaks.<br />
-            <span className="text-saffron">Every student</span> hears their own language.
+            Learn. Explore.<br />
+            <span className="text-saffron">Grow.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-white/80">
-            Live classes with real-time multilingual subtitles and AI-dubbed audio. 17 courses,
-            78 lessons, 15 languages. Powered by Google Cloud AI.
+            Learnova gives you live classes, translated subtitles, AI-dubbed audio, comic life
+            stories, quizzes, and career roadmaps — all in one place, in your language.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             {user ? (
@@ -72,7 +72,7 @@ export default function Landing({ user }) {
       {/* ── Features ──────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-6xl px-6 py-20">
         <h2 className="font-display text-4xl font-bold text-center mb-12">
-          Everything you need to learn in <span className="text-leaf">any language</span>
+          Everything you need to <span className="text-leaf">learn, explore & grow</span>
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {FEATURES.map(f => (
@@ -117,8 +117,8 @@ export default function Landing({ user }) {
 
       {/* ── CTA ───────────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-3xl px-6 py-24 text-center">
-        <h2 className="font-display text-4xl font-bold mb-4">Ready to learn in your language?</h2>
-        <p className="opacity-70 mb-8">Create a free account and start watching in Hindi, Spanish, Tamil, French and more.</p>
+        <h2 className="font-display text-4xl font-bold mb-4">Ready to start your journey?</h2>
+        <p className="opacity-70 mb-8">Create a free Learnova account and start learning in Hindi, Spanish, Tamil, French and more.</p>
         {!user && <Link className="btn text-lg px-10 py-4" to="/register">Create free account</Link>}
         {user && <Link className="btn text-lg px-10 py-4" to="/courses">Browse all courses</Link>}
       </section>
