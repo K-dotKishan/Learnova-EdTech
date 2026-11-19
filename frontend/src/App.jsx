@@ -52,8 +52,8 @@ export default function App() {
       {/* ── Top Nav ───────────────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-3 border-b border-stone-200 dark:border-teal-900 bg-white/90 dark:bg-ink/90 backdrop-blur">
         <Link to="/" className="font-display text-2xl font-extrabold flex items-center gap-2">
-          <span className="text-2xl">🌐</span>
-          LinguaLearn <span className="text-saffron">AI</span>
+          <span className="text-2xl">🌿</span>
+          Learnova
         </Link>
 
         <nav className="flex items-center gap-1 text-sm">
