@@ -6,6 +6,59 @@ Learnova is a full-stack multilingual learning platform. Students watch YouTube-
 
 ---
 
+## 🧰 Tech Stack
+
+### Frontend
+| Technology | Use |
+|---|---|
+| **React 18** | UI library — all pages and components |
+| **React Router DOM 6** | Client-side routing between pages |
+| **Vite 5** | Development server and build tool |
+| **Tailwind CSS 3** | All styling — utility-first CSS |
+| **YouTube IFrame API** | Embed and control YouTube videos in the player |
+| **Web Speech API** | Browser built-in — read-aloud on Legends page |
+| **WebSocket API** | Browser built-in — live class connection |
+| **localStorage** | Save JWT token, language preference, guest progress |
+
+### Backend
+| Technology | Use |
+|---|---|
+| **Python 3.11+** | Backend programming language |
+| **Django 5** | Web framework — models, views, admin, migrations |
+| **Django REST Framework** | REST API — ViewSets, serializers, permissions |
+| **djangorestframework-simplejwt** | JWT login/logout tokens |
+| **django-cors-headers** | Allow React frontend to call Django API |
+| **Django Channels** | WebSocket support for live classes |
+| **Daphne** | ASGI server — runs Django with WebSocket support |
+| **python-dotenv** | Load environment variables from `.env` file |
+| **Pillow** | Image processing for user avatars |
+
+### Database
+| Technology | Use |
+|---|---|
+| **SQLite** | Default database — stored as `backend/db.sqlite3` |
+
+### Translation & Captions
+| Technology | Use |
+|---|---|
+| **youtube-transcript-api** | Fetch auto-generated English captions from YouTube |
+| **translatepy** | Free translation library — no API key needed, uses Google Translate/Bing/DeepL internally |
+
+### Optional (Google Cloud — not required)
+| Technology | Use |
+|---|---|
+| **Google Cloud Translation API** | Faster batch translation (replaces translatepy if configured) |
+| **Google Cloud Text-to-Speech** | Generate AI-dubbed audio MP3 files |
+| **Google Cloud Speech-to-Text** | Transcribe teacher speech in live classes |
+
+### Language Switching (Legends)
+| Technology | Use |
+|---|---|
+| **Custom `useLang.js` hook** | EN/HI toggle — reads `en.json`/`hi.json`, saves to localStorage |
+| **No i18n library** | No react-i18next or similar — fully custom built |
+
+---
+
 ## 📸 Pages at a Glance
 
 | Page | Description |
